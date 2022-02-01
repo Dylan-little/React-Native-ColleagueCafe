@@ -7,6 +7,7 @@ import { baseUrl } from '../shared/baseUrl';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { deleteCart } from '../redux/ActionCreators';
+import { Button } from 'react-native';
 
 const mapStateToProps = state => {
     return {
@@ -79,13 +80,21 @@ class Carts extends Component {
             );
         }
         return (
-            <FlatList
-                data={this.props.coffees.coffees.filter(
-                    coffee => this.props.carts.includes(coffee.id)
-                )}
-                renderItem={renderCartItem}
-                keyExtractor={item => item.id.toString()}
-            />
+            <>
+                <FlatList
+                    data={this.props.coffees.coffees.filter(
+                        coffee => this.props.carts.includes(coffee.id)
+                    )}
+                    renderItem={renderCartItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+                <View>
+                    <Button
+                     title='Checkout'
+                     onPress={() => console.log('thank you for your order!')}
+                    />
+                </View>
+            </>
         );
     }
 }
